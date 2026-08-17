@@ -1,102 +1,191 @@
 # sitedajulia 
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Primeira Galeria - GitHub</title>
+    <title>SHEIN Style - Moda Online</title>
 
     <style>
-        /* Reset básico para limpar margens do navegador */
+        /* Reset básico */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: #f4f7f6;
-            color: #333;
+            background-color: #f8f8f8;
+            color: #222;
         }
 
+        /* --- CABEÇALHO --- */
         header {
-            text-align: center;
-            padding: 40px 20px;
             background-color: #ffffff;
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        header h1 {
-            color: #2c3e50;
-            margin-bottom: 10px;
+        .top-bar {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
 
-        /* --- CONCEITO: Flexbox e Classes --- */
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #000;
+            text-decoration: none;
+        }
+
+        .cart-status {
+            position: relative;
+            font-size: 14px;
+            font-weight: bold;
+            background: #f0f0f0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            background-color: #ff4757;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        /* --- GALERIA DE PRODUTOS --- */
+        .catalog-title {
+            text-align: center;
+            margin: 30px 0 10px;
+            font-size: 22px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
         .gallery-container {
             display: flex;
-            flex-wrap: wrap; /* Faz os cards irem para a linha de baixo se não couberem */
-            justify-content: center; /* Centraliza os cards na tela */
-            gap: 30px; /* Espaçamento moderno entre os elementos flex */
-            padding: 40px 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        /* Estilo do Card Individual */
+        /* Card do Produto */
         .card {
             background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            overflow: hidden; /* Garante que a imagem respeite as bordas arredondadas */
-            width: 300px;
-            transition: transform 0.2s;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            width: 240px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
         .card:hover {
-            transform: translateY(-5px); /* Efeito sutil ao passar o mouse */
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
         }
 
-        /* --- CONCEITO: Imagens e Espaçamentos --- */
+        /* Tag de Desconto */
+        .badge-discount {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #000;
+            color: #fff;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 3px;
+        }
+
         .card img {
-            width: 100%; /* A imagem ocupa toda a largura do card */
-            height: 200px;
-            object-fit: cover; /* Não distorce a imagem */
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
         }
 
         .card-content {
-            padding: 20px; /* Espaçamento interno do texto */
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
         }
 
         .card-content h3 {
-            margin-bottom: 10px;
-            color: #2c3e50;
-        }
-
-        .card-content p {
             font-size: 14px;
-            color: #666;
-            margin-bottom: 20px;
-            line-height: 1.4;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        /* Estilo do Botão de Curtida */
-        .like-btn {
-            background-color: #ff4757;
+        .price-container {
+            margin-bottom: 12px;
+        }
+
+        .price-current {
+            font-size: 16px;
+            font-weight: bold;
+            color: #ff4757;
+            margin-right: 6px;
+        }
+
+        .price-old {
+            font-size: 12px;
+            color: #aaa;
+            text-decoration: line-through;
+        }
+
+        /* Botão do Carrinho */
+        .cart-btn {
+            background-color: #000000;
             color: white;
             border: none;
-            padding: 10px 15px;
-            border-radius: 20px;
+            padding: 10px;
+            border-radius: 4px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 13px;
+            width: 100%;
             transition: background 0.2s;
         }
 
-        .like-btn:hover {
-            background-color: #e84118;
+        .cart-btn:hover {
+            background-color: #333333;
         }
 
-        /* Classe dinâmica que o JS pode adicionar */
-        .like-btn.liked {
+        /* Estado quando o item está no carrinho */
+        .cart-btn.added {
             background-color: #2ed573;
         }
     </style>
@@ -104,73 +193,117 @@
 <body>
 
     <header>
-        <h1>📸 Meu Primeiro Feed Interativo</h1>
-        <p>Projeto criado nas aulas de Web Development e hospedado no GitHub!</p>
+        <div class="top-bar">
+            FRETE GRÁTIS EM COMPRAS ACIMA DE R$ 99 | CUPOM: PRIMEIRACOMPRA
+        </div>
+        <div class="nav-container">
+            <a href="#" class="logo">SHEIN</a>
+            <div class="cart-status">
+                🛒 Carrinho: <span id="cart-counter" class="cart-count">0</span>
+            </div>
+        </div>
     </header>
+
+    <h2 class="catalog-title">Lançamentos da Semana</h2>
 
     <main class="gallery-container">
 
+        <!-- Produto 1 -->
         <div class="card">
-            <img src="https://picsum.photos/id/1015/300/200&quot; alt="Paisagem de Montanha">
+            <span class="badge-discount">-30%</span>
+            <img src="https://picsum.photos/id/64/300/400" alt="Vestido Casual">
             <div class="card-content">
-                <h3>Aventura nas Montanhas</h3>
-                <p>Um dia incrível explorando a natureza e testando meus códigos.</p>
-                <button class="like-btn">❤️ <span class="like-count">0</span> Curtidas</button>
+                <div>
+                    <h3>Vestido Elegante de Verão</h3>
+                    <div class="price-container">
+                        <span class="price-current">R$ 69,90</span>
+                        <span class="price-old">R$ 99,90</span>
+                    </div>
+                </div>
+                <button class="cart-btn">Adicionar ao Carrinho</button>
             </div>
         </div>
 
+        <!-- Produto 2 -->
         <div class="card">
-            <img src="https://picsum.photos/id/1025/300/200&quot; alt="Cachorro fofo">
+            <span class="badge-discount">-15%</span>
+            <img src="https://picsum.photos/id/338/300/400" alt="Jaqueta Jeans">
             <div class="card-content">
-                <h3>Meu Companheiro de Code</h3>
-                <p>Garante que o código não tenha nenhum bug (ou sim!).</p>
-                <button class="like-btn">❤️ <span class="like-count">0</span> Curtidas</button>
+                <div>
+                    <h3>Jaqueta Jeans Oversized</h3>
+                    <div class="price-container">
+                        <span class="price-current">R$ 119,90</span>
+                        <span class="price-old">R$ 139,90</span>
+                    </div>
+                </div>
+                <button class="cart-btn">Adicionar ao Carrinho</button>
             </div>
         </div>
 
+        <!-- Produto 3 -->
         <div class="card">
-            <img src="https://picsum.photos/id/1043/300/200&quot; alt="Espaço de trabalho">
+            <span class="badge-discount">-50%</span>
+            <img src="https://picsum.photos/id/823/300/400" alt="Camiseta Minimalista">
             <div class="card-content">
-                <h3>Setup Organizado</h3>
-                <p>Foco total nas aulas de HTML, CSS e JavaScript desta semana.</p>
-                <button class="like-btn">❤️ <span class="like-count">0</span> Curtidas</button>
+                <div>
+                    <h3>Camiseta Algodão Premium</h3>
+                    <div class="price-container">
+                        <span class="price-current">R$ 39,90</span>
+                        <span class="price-old">R$ 79,90</span>
+                    </div>
+                </div>
+                <button class="cart-btn">Adicionar ao Carrinho</button>
+            </div>
+        </div>
+
+        <!-- Produto 4 -->
+        <div class="card">
+            <span class="badge-discount">-20%</span>
+            <img src="https://picsum.photos/id/1005/300/400" alt="Conjunto Esportivo">
+            <div class="card-content">
+                <div>
+                    <h3>Conjunto Moletom Style</h3>
+                    <div class="price-container">
+                        <span class="price-current">R$ 89,90</span>
+                        <span class="price-old">R$ 109,90</span>
+                    </div>
+                </div>
+                <button class="cart-btn">Adicionar ao Carrinho</button>
             </div>
         </div>
 
     </main>
 
     <script>
-        // 1. Seleciona TODOS os botões de curtida da página (Eventos em múltiplos elementos)
-        const botoesLike = document.querySelectorAll('.like-btn');
+        // 1. Seleciona todos os botões de compra e o contador global no topo da página
+        const botoesCarrinho = document.querySelectorAll('.cart-btn');
+        const contadorGlobal = document.getElementById('cart-counter');
+        
+        // Variável controladora do número total de itens no carrinho
+        let totalNoCarrinho = 0;
 
-        // 2. Passa por cada botão usando o forEach
-        botoesLike.forEach(function(botao) {
-           
-            // Adiciona o evento de clique para CADA um dos botões
+        // 2. Percorre cada botão aplicando a mesma lógica aprendida na aula
+        botoesCarrinho.forEach(function(botao) {
+            
             botao.addEventListener('click', function() {
-               
-                // Encontra o elemento <span> de número de curtidas específico DESTE card
-                const spanContador = botao.querySelector('.like-count');
-               
-                // Pega o número atual que está no texto e transforma em número inteiro
-                let curtidasAtuais = parseInt(spanContador.textContent);
-               
-                // --- CONCEITO: Lógica de curtidas ---
-                // Verifica se o usuário já curtiu (checando se a classe 'liked' existe no botão)
-                if (botao.classList.contains('liked')) {
-                    // Se já tinha curtido: remove a classe e diminui 1 do contador
-                    botao.classList.remove('liked');
-                    curtidasAtuais--;
+                
+                // Lógica de alternância (Adicionar / Remover do carrinho)
+                if (botao.classList.contains('added')) {
+                    // Se já estava adicionado, remove do carrinho
+                    botao.classList.remove('added');
+                    botao.textContent = 'Adicionar ao Carrinho';
+                    totalNoCarrinho--;
                 } else {
-                    // Se não tinha curtido: adiciona a classe e aumenta 1 no contador
-                    botao.classList.add('liked');
-                    curtidasAtuais++;
+                    // Se não estava adicionado, inclui no carrinho
+                    botao.classList.add('added');
+                    botao.textContent = '✓ No Carrinho';
+                    totalNoCarrinho++;
                 }
-               
-                // Atualiza o texto do HTML com o novo valor (Contador de likes)
-                spanContador.textContent = curtidasAtuais;
+                
+                // Atualiza o contador geral no cabeçalho
+                contadorGlobal.textContent = totalNoCarrinho;
             });
-           
+            
         });
     </script>
 </body>
